@@ -1,0 +1,38 @@
+.dashboard-container {
+    padding: 20px;
+    font-family: Arial;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Pour le centrage */
+}
+
+.dashboard-title {
+    /* Tu peux ajouter du style ici si besoin */
+}
+
+.btn-events {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.events-list-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px; /* Pour que ce soit centré et pas trop large */
+}
+
+.event-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.no-events-text {
+    font-style: italic;
+    color: #666;
+}
