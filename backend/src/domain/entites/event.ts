@@ -44,9 +44,10 @@ export class Event {
     throw new Error("Event description is required");
   }
 
-  if (props.startDate <= new Date()) {
-    throw new Error("Event start date must be in the future");
-  }
+//   if (props.startDate < new Date()) {
+//     throw new Error("Event start date must be in the future");
+// } 
+
 
   if (props.capacity <= 0) {
     throw new Error("Event capacity must be greater than 0");

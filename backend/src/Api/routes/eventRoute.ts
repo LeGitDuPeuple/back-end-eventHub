@@ -52,20 +52,20 @@ export function registerEventRoutes(eventController: EventController) {
     eventController.create(req, res, next)
   );
 
-  eventRoutes.get("/", (req, res, next) =>
+  eventRoutes.get("/",(req, res, next) =>
     eventController.getAll(req, res, next)
   );
 
-  eventRoutes.get("/:id", (req, res, next) =>
-    eventController.getById(req, res, next)
+  eventRoutes.get("/:id",(req, res, next) =>
+    eventController.getById(req as any, res, next)
   );
 
   eventRoutes.put("/:id", (req, res, next) =>
-    eventController.update(req, res, next)
+    eventController.update(req as any, res, next)
   );
 
-  eventRoutes.delete("/:id", (req, res, next) =>
-    eventController.delete(req, res, next)
+  eventRoutes.delete("/:id",(req, res, next) =>
+    eventController.delete(req as any, res, next)
   );
 }
 

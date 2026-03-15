@@ -1,4 +1,5 @@
 services:
+  # Ton PostgreSQL actuel
   postgres:
     image: postgres:15
     container_name: postgres
@@ -12,5 +13,19 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  
+  mongodb:
+    image: mongo:6.0 
+    container_name: mongodb_analytics
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+
 volumes:
   pgdata:
+  mongodata: 

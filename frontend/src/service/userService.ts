@@ -9,5 +9,9 @@ export const userService = {
   
   register: async (userData: any): Promise<void> => {
     await api.post('/users/register', userData);
+  },
+  getMe: async (): Promise<any> => {
+    const response = await api.get('/users/me'); 
+    return response.data;
   }
 };

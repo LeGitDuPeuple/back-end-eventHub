@@ -1,0 +1,49 @@
+/* src/styles/analytics.css */
+
+.stats-page-container {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre tout le contenu */
+    background-color: #f4f7fe; /* Un fond léger pour faire ressortir la carte */
+    min-height: 100vh;
+}
+
+.stats-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 800px; /* Ici on contrôle la largeur max */
+}
+
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    marginBottom: 20px;
+}
+
+.btn-back {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: #f0f0f0;
+    border-color: #bbb;
+}
+
+.stats-title {
+    color: #1a202c;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    text-align: center;
+}

@@ -1,34 +1,26 @@
-import type { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { extractToken} from "../utils/extractToken";
-import {getEnvVariable } from "../utils/getEnvVariable"
 
-export const authenticationMiddleware = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const authenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.cookies?.accessToken || req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ 
+      success: false, 
+      message: "Accès refusé : aucun token trouvé dans les cookies ou le header" 
+    });
+  }
+
   try {
-    const authorization = req.headers.authorization;
-
-    if (!authorization) {
-      return res.jsonError("Missing authorization header", 401);
-    }
-
- 
-    const token = extractToken(authorization);
-
-    if (!token) {
-      return res.jsonError("Invalid authorization header", 401);
-    }
-
-   
-    jwt.verify(token, getEnvVariable("JWT_SECRET"));
-
+    const secret = process.env.JWT_SECRET || "ton_secret_key";
+    const decoded = jwt.verify(token, secret);
     
+    (req as any).user = decoded;
     next();
   } catch (error) {
-    return res.jsonError("Invalid or expired token", 401);
+    return res.status(401).json({ 
+      success: false, 
+      message: "Session expirée ou token invalide" 
+    });
   }
 };
-

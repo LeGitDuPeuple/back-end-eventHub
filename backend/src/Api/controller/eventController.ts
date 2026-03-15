@@ -4,6 +4,7 @@ import { GetAllEventUseCase } from "../../application/usecases/getAllEventUsecas
 import { GetOneEventUseCase } from "../../application/usecases/getOneEventUsecase";
 import { UpdateEventUseCase } from "../../application/usecases/updateEventUsecase";
 import { DeleteEventUseCase } from "../../application/usecases/deleteEventUsecase";
+import prisma from "../../infra/prismaClient"
 
 export class EventController {
   constructor(
@@ -25,14 +26,33 @@ export class EventController {
   }
 
   // GET /api/events
-  async getAll(req: Request, res: Response, next: NextFunction) {
-    try {
-      const events = await this.getAllEventUseCase.execute();
-      res.jsonSuccess(events, 200);
-    } catch (error) {
-      next(error);
-    }
+async getAll(req: Request, res: Response, next: NextFunction) {
+  try {
+    const skip = parseInt(req.query.skip as string) || 0;
+    const take = parseInt(req.query.take as string) || 5;
+
+  
+    const [events, total] = await Promise.all([
+      prisma.event.findMany({
+        skip: skip, 
+        take: take,
+        orderBy: { startDate: 'desc' }
+      }),
+      prisma.event.count()
+    ]);
+
+    res.jsonSuccess({
+      events,
+      pagination: {
+        currentSkip: skip,
+        take: take,
+        totalItems: total
+      }
+    });
+  } catch (error) {
+    next(error);
   }
+}
 
   // GET /api/events/:id
  async getById(
