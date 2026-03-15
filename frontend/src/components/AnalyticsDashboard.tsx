@@ -30,7 +30,7 @@ export const AnalyticsDashboard = () => {
                     <XAxis dataKey="date" />
                     <YAxis allowDecimals={false} />
                     <Tooltip />
-                    <Bar dataKey="total" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                   <Bar dataKey="total" fill="#8884d8" radius={[4, 4, 0, 0]} barSize={20} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

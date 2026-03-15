@@ -36,7 +36,7 @@ async getAll(req: Request, res: Response, next: NextFunction) {
       prisma.event.findMany({
         skip: skip, 
         take: take,
-        orderBy: { startDate: 'desc' }
+        orderBy: { startDate: 'asc' }
       }),
       prisma.event.count()
     ]);

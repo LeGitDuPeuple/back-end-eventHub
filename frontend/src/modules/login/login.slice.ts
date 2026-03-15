@@ -5,37 +5,47 @@ interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   loading: boolean;
-  isInitialized: boolean; // <-- AJOUTÉ : Pour savoir si on a fini de vérifier le cookie
+  isInitialized: boolean; // Flag crucial pour savoir si l'app a fini de checker le cookie au démarrage
 }
 
 const initialState: AuthState = {
   user: null,
   isAuthenticated: false,
   loading: false,
-  isInitialized: false, // <-- AJOUTÉ : Initialisé à false par défaut
+  isInitialized: false, // On commence à false pour bloquer l'accès tant que l'auth n'est pas vérifiée
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+   // Enregistre l'utilisateur et valide l'accès après le formulaire de login.
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isAuthenticated = true;
       state.loading = false;
-      state.isInitialized = true; // Si on se connecte manuellement, c'est aussi initialisé
+      state.isInitialized = true; 
     },
-    // Modifié pour accepter "null" si l'hydratation échoue (pas de cookie)
+
+    // Restaure la session au rafraîchissement en utilisant le cookie.
     hydrateAuth: (state, action: PayloadAction<User | null>) => {
       state.user = action.payload;
-      state.isAuthenticated = !!action.payload; // true si user existe, false sinon
+      state.isAuthenticated = !!action.payload; 
       state.loading = false;
-      state.isInitialized = true; // <--- L'hydratation est terminée !
+      state.isInitialized = true; 
     },
+
+   // Déconnecte l'utilisateur et vide les données du store. (pas encore fait de déconexion)
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
+      state.isInitialized = true;
     },
+
+    /**
+     * GESTION DU LOADING :
+     * Permet d'afficher un spinner ou de désactiver des boutons pendant les appels API.
+     */
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     }

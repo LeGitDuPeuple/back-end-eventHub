@@ -15,7 +15,7 @@ export class LoginUserUseCase {
     if (!isPasswordValid) throw new Error("Identifiants invalides");
 
     const token = jwt.sign(
-      { userId: user.id, email: user.email, role: user.role },
+      { userId: user.id, email: user.email,firstname: user.firstname, role: user.role },
       getEnvVariable("JWT_SECRET"),
       { expiresIn: "24h" }
     );

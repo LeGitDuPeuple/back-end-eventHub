@@ -9,18 +9,19 @@ export const useHydrateAuth = () => {
   useEffect(() => {
     const initAuth = async () => {
       try {
-        // 1. On appelle ton nouveau getMe dans le service
         const response = await userService.getMe();
         
-        // 2. On récupère les données (adapte selon la forme de ta réponse API)
         const userData = response.data?.user || response.user;
-        
-        // 3. On remplit le store Redux
-        dispatch(hydrateAuth(userData));
+        // sert à débuger
+        console.log("Données reçues du serveur :", userData);
+
+        if (userData) {
+          dispatch(hydrateAuth(userData));
+        } else {
+          dispatch(hydrateAuth(null));
+        }
       } catch (error) {
-        // 4. Si ça échoue (pas de cookie ou token expiré), on met null
-        // Ça passera isInitialized à true, mais isAuthenticated à false
-        console.log("Session non trouvée ou expirée");
+        console.warn("Hydratation : session non trouvée");
         dispatch(hydrateAuth(null));
       }
     };

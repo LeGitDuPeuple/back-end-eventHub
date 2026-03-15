@@ -9,9 +9,9 @@ const mongoURI = process.env.MONGO_URI || 'mongodb://admin:password@localhost:27
 async function connectMongo() {
   try {
     await mongoose.connect(mongoURI);
-    console.log('✅ MongoDB Analytics connecté');
+    console.log(' MongoDB Analytics connecté');
   } catch (err) {
-    console.error('❌ Erreur de connexion Mongo :', err);
+    console.error(' Erreur de connexion Mongo :', err);
   }
 }
 

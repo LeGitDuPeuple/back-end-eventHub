@@ -54,12 +54,12 @@ async me(req: Request, res: Response) {
 
     return res.status(200).json({
       data: {
-        user: { // Ajoute cet objet "user" pour matcher ton service front
+        user: { 
           id: user.userId,
           email: user.email,
           role: user.role,
-          firstname: user.firstname, // <--- VÉRIFIE QUE C'EST DANS TON TOKEN
-          lastname: user.lastname    // <--- VÉRIFIE AUSSI
+          firstname: user.firstname || 'User', 
+          lastname: user.lastname || ''
         }
       }
     });
