@@ -42,10 +42,7 @@ export const authSlice = createSlice({
       state.isInitialized = true;
     },
 
-    /**
-     * GESTION DU LOADING :
-     * Permet d'afficher un spinner ou de désactiver des boutons pendant les appels API.
-     */
+  
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     }

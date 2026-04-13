@@ -26,7 +26,8 @@ export class LoginUserUseCase {
         id: user.id,
         email: user.email,
         firstname: user.firstname,
-        lastname: user.lastname
+        lastname: user.lastname,
+        otp_enable: user.otp_enable,
       }
     };
   }
