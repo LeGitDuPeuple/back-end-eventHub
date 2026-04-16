@@ -14,9 +14,8 @@ pipeline {
 
         stage('Install') {
             steps {
-                // Si ton code est dans un dossier 'back', laisse dir('back'). 
-                // Sinon, enlève la ligne dir et l'accolade correspondante.
-                dir('back') {
+                // REMPLACE 'backend' par le nom exact de ton dossier
+                dir('backend') {
                     sh 'npm install'
                 }
             }
@@ -24,19 +23,16 @@ pipeline {
 
         stage('Tests Jest') {
             steps {
-                dir('back') {
-                    sh 'npm test'
+                dir('backend') {
+                    // On utilise 'npm run test' pour être sûr
+                    sh 'npm run test'
                 }
             }
         }
     }
 
     post {
-        success {
-            echo "✅ Succès : Les tests sont passés !"
-        }
-        failure {
-            echo "❌ Échec : Les tests ont échoué."
-        }
+        success { echo "✅ Succès !" }
+        failure { echo "❌ Échec." }
     }
 }
