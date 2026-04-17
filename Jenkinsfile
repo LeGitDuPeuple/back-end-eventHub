@@ -14,7 +14,6 @@ pipeline {
 
         stage('Install') {
             steps {
-                // REMPLACE 'backend' par le nom exact de ton dossier
                 dir('backend') {
                     sh 'npm install'
                 }
@@ -24,7 +23,6 @@ pipeline {
         stage('Tests Jest') {
             steps {
                 dir('backend') {
-                    // On utilise 'npm run test' pour être sûr
                     sh 'npm run test'
                 }
             }
@@ -32,7 +30,7 @@ pipeline {
     }
 
     post {
-        success { echo "✅ Succès !!!!" }
-        failure { echo "❌ Échec. Build KO" }
+        success { echo "✅ Succès !!!!!!" }
+        failure { echo "❌ Échec. Build KO..." }
     }
 }

@@ -1,0 +1,20 @@
+# 🚀 EventHub - Pipeline CI/CD & Infrastructure Docker
+
+Ce dépôt contient le code source du backend **EventHub** ainsi que l'infrastructure de déploiement continu (CI/CD) mise en place sur **AWS**.
+
+## 🛠️ Infrastructure Docker
+Le serveur d'intégration continue tourne sous **Docker** sur une instance AWS EC2.
+
+### Installation de Jenkins
+Pour garantir la persistance des données (utilisateurs, jobs, historique), Jenkins a été lancé avec un volume Docker :
+```bash
+# Création du volume pour la persistance
+docker volume create jenkins_home
+
+# Lancement du conteneur Jenkins
+docker run -d \
+  -p 8080:8080 \
+  -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  --name jenkins-server \
+  jenkins/jenkins:lts
