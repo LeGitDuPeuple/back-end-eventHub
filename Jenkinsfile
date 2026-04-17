@@ -32,7 +32,7 @@ pipeline {
     }
 
     post {
-        success { echo "✅ Succès !" }
-        failure { echo "❌ Échec." }
+        success { echo "✅ Succès ! Build OK" }
+        failure { echo "❌ Échec. Build KO" }
     }
 }
